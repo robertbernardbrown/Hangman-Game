@@ -1,3 +1,33 @@
-h1 {
-	font-family: Georgia, 'Times New Roman', Times, serif;
+/*FULL DOCUMENT*/
+body {
+    background: url('../images/background.jpg') no-repeat center center fixed;
+    color: white;
+}
+
+/*HEADER*/
+
+.container {
+    width: 80%;
+    background-color:rgba(167, 163, 163, 0.8);
+    margin: 0 auto;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    border: 2px solid red;
+    margin: 2% auto 2% auto;
+}
+
+/*BODY*/
+
+.hangman {
+    font-size: 20px;
+    text-align: center;
+    color: red;
+    padding: 5%;
+}
+
+.body {
+    height: 50%;
 }
