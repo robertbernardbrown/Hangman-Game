@@ -54,5 +54,10 @@ body {
 .content {
     margin: 5%;
     padding: 1% 0 1% 0;
-
+}
+.hidden {
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    float: left;
 }
