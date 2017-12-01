@@ -1,33 +1,58 @@
 /*FULL DOCUMENT*/
 body {
     background: url('../images/background.jpg') no-repeat center center fixed;
-    color: white;
+    color: black;
 }
 
 /*HEADER*/
 
 .container {
     width: 80%;
-    background-color:rgba(167, 163, 163, 0.8);
+    background-color:rgba(255, 255, 255, 0.8);
     margin: 0 auto;
 }
 
 .title {
     text-align: center;
     font-size: 2em;
-    border: 2px solid red;
     margin: 2% auto 2% auto;
+    padding: 2% 0 2% 0; 
 }
 
 /*BODY*/
 
+.contain {
+    max-height: 100%;
+    max-width: 100%;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
 .hangman {
-    font-size: 20px;
+    max-width: 20%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.hangman > img {
+    height: 90%;
+    width: 90%;
+}
+
+#directions {
     text-align: center;
-    color: red;
-    padding: 5%;
+    font-size: 2em;
+    font-style: bold;
 }
 
 .body {
-    height: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.content {
+    margin: 5%;
+    padding: 1% 0 1% 0;
+
 }
