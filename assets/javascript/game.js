@@ -2,7 +2,8 @@
 var bodyContent = document.getElementById("bodyContent");
 var prompt = document.getElementById("directions");
 var userGuess = document.getElementById("guessed");
-var letterArray = [];
+var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var blankArray = [];
 
 function showContent(e) {
     bodyContent.classList.add("container", "body");
@@ -15,9 +16,14 @@ function hidePrompt (e) {
 }
 
 function userInput (e) {
-    letterArray.push(e.key);
-    console.log(letterArray);
-    userGuess.innerHTML = letterArray;
+    for (i = 0; i < letterArray.length; i++) {
+        if(e.key === letterArray[i]) {
+            blankArray.push(" " + e.key);
+            letterArray.splice(i, 1);
+            console.log(letterArray);
+            guessed.innerHTML = blankArray;
+        }
+    }
 }
 
 //event listeners
