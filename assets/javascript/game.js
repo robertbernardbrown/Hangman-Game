@@ -6,6 +6,33 @@ var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "
 var blankArray = [];
 var userChances = document.getElementById("chances");
 var hangmanWords = ["hawaii", "surfing", "Humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"]
+var guessedWord = document.getElementById("guessWord")
+var randomNum = Math.round(Math.random() * hangmanWords.length);
+var randomWord = hangmanWords[randomNum];
+var randomWordLength = hangmanWords[randomNum].length;
+var randomWordArray = randomWord.split("");
+console.log(randomWordArray);
+var emptyArray = [];
+var revealArray = [];
+
+function randomWordFunction(arr) {
+    for (j = 0; j <= arr.length; j++) {
+        emptyArray.push(" _");
+    }
+    var emptyArrayString = emptyArray.toString().replace(/,/g, '');
+    guessedWord.innerHTML = emptyArrayString;
+}
+
+function revealWord (e) {
+    for (k = 0; k < randomWordArray.length; k++) {
+        if (e.key === randomWordArray[k]) {
+            var hi = revealArray.push(e.key);
+            var spot = randomWordArray[k]
+            console.log(spot);
+        }
+    }
+}
+
 
 function showContent(e) {
     bodyContent.classList.add("container", "body");
@@ -39,3 +66,7 @@ document.addEventListener('keydown', showContent)
 document.addEventListener('keydown', hidePrompt)
 document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', updateChances);
+document.addEventListener('keydown', revealWord);
+
+//run function
+randomWordFunction(randomWordArray);
