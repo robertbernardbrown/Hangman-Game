@@ -1,25 +1,49 @@
-//grab triggers
+//------GRAB HTML ELEMENTS ----------
 var bodyContent = document.getElementById("bodyContent");
 var prompt = document.getElementById("directions");
+
+var guessedWord = document.getElementById("guessWord");
 var userGuess = document.getElementById("guessed");
+var userChances = document.getElementById("chances");
+var winColumn = document.getElementById("wins");
+
+
+// ------DECLARE ARRAYS AND VARIABLES --------
+//keep track of letters guessed
 var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var blankArray = [];
-var userChances = document.getElementById("chances");
+//answer array
 var hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"];
-var guessedWord = document.getElementById("guessWord");
-var winColumn = document.getElementById("wins");
+//reveal word array
+var revealArray = [];
+//counting wins
 var winCount = 1;
 
-
 //grab random number for random word
-var randomWord = hangmanWords[Math.round(Math.random() * (hangmanWords.length - 1))];
+var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
+var randomWord = hangmanWords[randomVar];
 console.log(randomWord);
 var randomWordArray = randomWord.split("");
-console.log(randomWordArray);
 
 
-//declare empty array
-var revealArray = [];
+
+// -----FUNCTIONS------
+
+// tap key to show game content area
+function showContent() {
+    bodyContent.classList.add("container", "body");
+    bodyContent.classList.remove("hidden");
+}
+function hidePrompt () {
+    prompt.classList.add("hidden");
+    prompt.classList.remove("title", "container");
+}
+
+// game functionality
+function randomizer (arr) {
+    randomVar = Math.round(Math.random() * (arr.length - 1));
+    randomWord = arr[randomVar];
+}
 
 function blanks() {
     for (k = 0; k < randomWord.length; k++) {
@@ -40,27 +64,23 @@ for (var m = 0; m < randomWordArray.length; m++) {
     guessedWord.innerHTML = arrayString;
 }
 
-function stringIt() {
+function stringIt(e) {
     for (n = 0; n < revealArray.length; n++) {
         var raString = revealArray.toString();
         var rwaString = randomWordArray.toString();
         if (raString === rwaString) {
             winColumn.innerHTML = winCount++; //count a win
+            blankArray = [];
+            revealArray = [];
+            letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            hangmanWords.splice(randomVar, 1);
+            randomizer(hangmanWords);
+            console.log(randomWord)
+            blanks();
+            revealWord(e);
             break;
         }
     }
-    console.log(revealArray);
-    console.log(randomWordArray);
-}
-
-function showContent() {
-    bodyContent.classList.add("container", "body");
-    bodyContent.classList.remove("hidden");
-}
-
-function hidePrompt () {
-    prompt.classList.add("hidden");
-    prompt.classList.remove("title", "container");
 }
 
 function userInput (e) {
@@ -80,7 +100,7 @@ function updateChances (e) {
 
 }
 
-//event listeners
+// ------EVENT LISTENERS-------
 document.addEventListener('keydown', showContent);
 document.addEventListener('keydown', hidePrompt);
 document.addEventListener('keydown', userInput);
@@ -90,5 +110,5 @@ document.addEventListener('keydown', stringIt);
 
 
 
-//run function
+// --------RUN FUNCTION--------
 blanks();
