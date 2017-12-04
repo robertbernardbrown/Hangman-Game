@@ -5,41 +5,44 @@ var userGuess = document.getElementById("guessed");
 var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var blankArray = [];
 var userChances = document.getElementById("chances");
-var hangmanWords = ["hawaii", "surfing", "Humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"]
+var hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"]
 var guessedWord = document.getElementById("guessWord")
-var randomNum = Math.round(Math.random() * hangmanWords.length);
-var randomWord = hangmanWords[randomNum];
-var randomWordLength = hangmanWords[randomNum].length;
+
+//grab random number for random word
+var randomWord = hangmanWords[Math.round(Math.random() * (hangmanWords.length - 1))];
+console.log(randomWord);
 var randomWordArray = randomWord.split("");
 console.log(randomWordArray);
-var emptyArray = [];
+
+
+//declare empty array
 var revealArray = [];
 
-function randomWordFunction(arr) {
-    for (j = 0; j <= arr.length; j++) {
-        emptyArray.push(" _");
+function blanks() {
+    for (k = 0; k < randomWord.length; k++) {
+        revealArray[k] = '_';
     }
-    var emptyArrayString = emptyArray.toString().replace(/,/g, '');
-    guessedWord.innerHTML = emptyArrayString;
+    var emptyString = revealArray.toString().replace(/,/g, ''); //use regex to remove commas
+    guessedWord.innerHTML = emptyString;
 }
 
-function revealWord (e) {
-    for (k = 0; k < randomWordArray.length; k++) {
-        if (e.key === randomWordArray[k]) {
-            var hi = revealArray.push(e.key);
-            var spot = randomWordArray[k]
-            console.log(spot);
-        }
+function revealWord(e) {
+for (var m = 0; m < randomWordArray.length; m++) {
+    
+    if (randomWordArray[m] === e.key) {
+        revealArray[m] = e.key;
+        } 
     }
+    var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas    
+    guessedWord.innerHTML = arrayString;
 }
 
-
-function showContent(e) {
+function showContent() {
     bodyContent.classList.add("container", "body");
     bodyContent.classList.remove("hidden");
 }
 
-function hidePrompt (e) {
+function hidePrompt () {
     prompt.classList.add("hidden");
     prompt.classList.remove("title", "container");
 }
@@ -49,7 +52,7 @@ function userInput (e) {
         if(e.key === letterArray[i]) {
             blankArray.push(" " + e.key);
             letterArray.splice(i, 1);
-            console.log(letterArray);
+            // console.log(letterArray);
             guessed.innerHTML = blankArray;
         }
     }
@@ -62,11 +65,12 @@ function updateChances (e) {
 }
 
 //event listeners
-document.addEventListener('keydown', showContent)
-document.addEventListener('keydown', hidePrompt)
+document.addEventListener('keydown', showContent);
+document.addEventListener('keydown', hidePrompt);
 document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', updateChances);
 document.addEventListener('keydown', revealWord);
 
+
 //run function
-randomWordFunction(randomWordArray);
+blanks();
