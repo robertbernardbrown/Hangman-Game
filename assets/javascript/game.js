@@ -5,8 +5,11 @@ var userGuess = document.getElementById("guessed");
 var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var blankArray = [];
 var userChances = document.getElementById("chances");
-var hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"]
-var guessedWord = document.getElementById("guessWord")
+var hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"];
+var guessedWord = document.getElementById("guessWord");
+var winColumn = document.getElementById("wins");
+var winCount = 1;
+
 
 //grab random number for random word
 var randomWord = hangmanWords[Math.round(Math.random() * (hangmanWords.length - 1))];
@@ -35,6 +38,19 @@ for (var m = 0; m < randomWordArray.length; m++) {
     }
     var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas    
     guessedWord.innerHTML = arrayString;
+}
+
+function stringIt() {
+    for (n = 0; n < revealArray.length; n++) {
+        var raString = revealArray.toString();
+        var rwaString = randomWordArray.toString();
+        if (raString === rwaString) {
+            winColumn.innerHTML = winCount++; //count a win
+            break;
+        }
+    }
+    console.log(revealArray);
+    console.log(randomWordArray);
 }
 
 function showContent() {
@@ -70,6 +86,8 @@ document.addEventListener('keydown', hidePrompt);
 document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', updateChances);
 document.addEventListener('keydown', revealWord);
+document.addEventListener('keydown', stringIt);
+
 
 
 //run function
