@@ -21,9 +21,9 @@ var winCount = 1;
 
 //grab random number for random word
 var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
-var randomWord = hangmanWords[randomVar];
+var randomWord = hangmanWords[randomVar].split("");
 console.log(randomWord);
-var randomWordArray = randomWord.split("");
+// var randomWordArray = randomWord.split("");
 
 
 
@@ -38,6 +38,7 @@ function hidePrompt () {
     prompt.classList.add("hidden");
     prompt.classList.remove("title", "container");
 }
+
 
 // game functionality
 function randomizer (arr) {
@@ -54,20 +55,20 @@ function blanks() {
 }
 
 function revealWord(e) {
-for (var m = 0; m < randomWordArray.length; m++) {
+for (var m = 0; m < randomWord.length; m++) {
     
-    if (randomWordArray[m] === e.key) {
+    if (randomWord[m] === e.key) {
         revealArray[m] = e.key;
         } 
     }
-    var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas    
+    var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
     guessedWord.innerHTML = arrayString;
 }
 
 function stringIt(e) {
     for (n = 0; n < revealArray.length; n++) {
         var raString = revealArray.toString();
-        var rwaString = randomWordArray.toString();
+        var rwaString = randomWord.toString();
         if (raString === rwaString) {
             winColumn.innerHTML = winCount++; //count a win
             blankArray = [];
@@ -75,9 +76,18 @@ function stringIt(e) {
             letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
             hangmanWords.splice(randomVar, 1);
             randomizer(hangmanWords);
-            console.log(randomWord)
+            userInput(e);
             blanks();
             revealWord(e);
+            raString = revealArray.toString();
+            rwaString = randomWord.toString();
+            console.log(randomWord)
+            // console.log(randomWordArray)
+            console.log(blankArray)
+            console.log(revealArray)
+            console.log(letterArray)
+            console.log(raString)
+            console.log(rwaString)
             break;
         }
     }
