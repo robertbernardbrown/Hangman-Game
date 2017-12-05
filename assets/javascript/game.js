@@ -6,6 +6,8 @@ var guessedWord = document.getElementById("guessWord");
 var userGuess = document.getElementById("guessed");
 var userChances = document.getElementById("chances");
 var winColumn = document.getElementById("wins");
+var youWin = document.getElementById("win");
+var youWinText = document.getElementById("win-text")
 
 
 // ------DECLARE ARRAYS AND VARIABLES --------
@@ -43,7 +45,7 @@ function hidePrompt () {
 // game functionality
 function randomizer (arr) {
     randomVar = Math.round(Math.random() * (arr.length - 1));
-    randomWord = arr[randomVar];
+    randomWord = arr[randomVar].split("");
 }
 
 function blanks() {
@@ -70,27 +72,37 @@ function stringIt(e) {
         var raString = revealArray.toString();
         var rwaString = randomWord.toString();
         if (raString === rwaString) {
-            winColumn.innerHTML = winCount++; //count a win
-            blankArray = [];
-            revealArray = [];
-            letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-            hangmanWords.splice(randomVar, 1);
-            randomizer(hangmanWords);
-            userInput(e);
-            blanks();
-            revealWord(e);
-            raString = revealArray.toString();
-            rwaString = randomWord.toString();
-            console.log(randomWord)
-            // console.log(randomWordArray)
-            console.log(blankArray)
-            console.log(revealArray)
-            console.log(letterArray)
-            console.log(raString)
-            console.log(rwaString)
+            iterate(e);
             break;
-        }
+        } 
     }
+}
+
+function iterate(e) {
+    winColumn.innerHTML = winCount++; //count a win
+    blankArray = [];
+    revealArray = [];
+    letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    hangmanWords.splice(randomVar, 1);
+    randomizer(hangmanWords);
+    userInput(e);
+    blanks();
+    revealWord(e);
+    raString = revealArray
+    rwaString = randomWord
+    if (winColumn.innerHTML == "7") {
+        youWin.classList.add("win-active");
+        youWin.classList.remove("hidden");
+        youWinText.classList.add("win-text-active");
+        youWinText.classList.remove("hidden");
+    }
+    // console.log(randomWord)
+    // console.log(hangmanWords)
+    // console.log(blankArray)
+    // console.log(revealArray)
+    // console.log(letterArray)
+    // console.log(raString)
+    // console.log(rwaString)
 }
 
 function userInput (e) {
@@ -117,6 +129,7 @@ document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', updateChances);
 document.addEventListener('keydown', revealWord);
 document.addEventListener('keydown', stringIt);
+
 
 
 
