@@ -20,6 +20,9 @@ var hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pinea
 var revealArray = [];
 //counting wins
 var winCount = 1;
+//chances left
+var chancesLeft = 11;
+userChances.innerHTML = chancesLeft
 
 //grab random number for random word
 var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
@@ -56,13 +59,20 @@ function blanks() {
     guessedWord.innerHTML = emptyString;
 }
 
+function decrementChances(e) {
+    var index = randomWord.indexOf(e.key);
+    if (index === -1) {
+        chancesLeft--;
+        userChances.innerHTML = chancesLeft        
+    }
+}
+
 function revealWord(e) {
-for (var m = 0; m < randomWord.length; m++) {
-    
+for (m = 0; m < randomWord.length; m++) {
     if (randomWord[m] === e.key) {
         revealArray[m] = e.key;
-        } 
-    }
+        }     
+    } 
     var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
     guessedWord.innerHTML = arrayString;
 }
@@ -116,9 +126,7 @@ function userInput (e) {
     }
 }
 
-//COME BACK TO THIS ONE
-function updateChances (e) {
-    //userChances.innerHTML = 11;
+function updateMan () {
 
 }
 
@@ -129,6 +137,8 @@ document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', updateChances);
 document.addEventListener('keydown', revealWord);
 document.addEventListener('keydown', stringIt);
+document.addEventListener('keydown', decrementChances);
+
 
 
 
