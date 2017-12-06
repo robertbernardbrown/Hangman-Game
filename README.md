@@ -23,4 +23,4 @@ Text Editor - VS Studio
 ## Future Development
 
 * Add more features with Javascript
-* Add backend to handle contact form processes
+* Add backend to remember users and their highscores
