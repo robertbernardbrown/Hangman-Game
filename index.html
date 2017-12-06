@@ -19,7 +19,7 @@
         </div> <!-- end "title-container" -->
 
         <div class = "hangman">
-            <img src="assets/images/hangman11.svg" alt="hangman">
+            <img id = "hangman-pic" src="assets/images/hangman11.svg" alt="hangman">
         </div>
 
         <h2 id = "directions" class = "title container">Tap a key to get going</h2>
@@ -39,7 +39,11 @@
     </div>  
 
     <div id = "win" class = "hidden"> 
-        <div id = "win-text" class = "hidden"> Cowabunga, YOU WIN! </div>
+        <div id = "win-text" class = "hidden"> Cowabunga! YOU WIN! </div>
+    </div>
+
+    <div id = "lose" class = "hidden"> 
+            <div id = "lose-text" class = "hidden"> Major beef! YOU LOSE! </div>
     </div>
 
 <script src="assets/javascript/game.js"></script>

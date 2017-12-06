@@ -8,7 +8,8 @@ var userChances = document.getElementById("chances");
 var winColumn = document.getElementById("wins");
 var youWin = document.getElementById("win");
 var youWinText = document.getElementById("win-text")
-
+var youLose = document.getElementById("lose");
+var youLoseText = document.getElementById("lose-text")
 
 // ------DECLARE ARRAYS AND VARIABLES --------
 //keep track of letters guessed
@@ -23,6 +24,9 @@ var winCount = 1;
 //chances left
 var chancesLeft = 11;
 userChances.innerHTML = chancesLeft
+//starting hangman illustration
+var increment = 0;
+
 
 //grab random number for random word
 var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
@@ -46,6 +50,17 @@ function hidePrompt () {
 
 
 // game functionality
+
+function revealWord(e) {
+    for (m = 0; m < randomWord.length; m++) {
+        if (randomWord[m] === e.key) {
+            revealArray[m] = e.key;
+            }     
+        } 
+        var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
+        guessedWord.innerHTML = arrayString;
+    }
+    
 function randomizer (arr) {
     randomVar = Math.round(Math.random() * (arr.length - 1));
     randomWord = arr[randomVar].split("");
@@ -61,20 +76,22 @@ function blanks() {
 
 function decrementChances(e) {
     var index = randomWord.indexOf(e.key);
+    var chancesLeftMin = valBetween(chancesLeft, 0, 11);
     if (index === -1) {
         chancesLeft--;
-        userChances.innerHTML = chancesLeft        
+        userChances.innerHTML = chancesLeftMin
+        updateMan();       
     }
-}
-
-function revealWord(e) {
-for (m = 0; m < randomWord.length; m++) {
-    if (randomWord[m] === e.key) {
-        revealArray[m] = e.key;
-        }     
-    } 
-    var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
-    guessedWord.innerHTML = arrayString;
+    if (chancesLeftMin === 0) {
+        youLose.classList.add("lose-active");
+        youLose.classList.remove("hidden");
+        youLoseText.classList.add("lose-text-active");
+        youLoseText.classList.remove("hidden");
+        letterArray = [];
+        revealArray = [];
+        blankArray = [];
+        randomWord = null;
+    }
 }
 
 function stringIt(e) {
@@ -127,21 +144,24 @@ function userInput (e) {
 }
 
 function updateMan () {
+    increment++;
+    var incrementMax = valBetween(increment, 0, 11);
+    document.getElementById("hangman-pic").src="assets/images/hangman" + incrementMax + ".svg";
+}
 
+//max my increment variable at 11 so not making superfluous requests when game is over
+//credit to http://www.hnldesign.nl/work/code/javascript-limit-integer-min-max/
+function valBetween(v, min, max) {
+    return (Math.min(max, Math.max(min, v)));
 }
 
 // ------EVENT LISTENERS-------
 document.addEventListener('keydown', showContent);
 document.addEventListener('keydown', hidePrompt);
 document.addEventListener('keydown', userInput);
-document.addEventListener('keydown', updateChances);
 document.addEventListener('keydown', revealWord);
 document.addEventListener('keydown', stringIt);
 document.addEventListener('keydown', decrementChances);
-
-
-
-
 
 // --------RUN FUNCTION--------
 blanks();
