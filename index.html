@@ -19,27 +19,34 @@
         </div> <!-- end "title-container" -->
 
         <div class = "hangman">
-            <img src="assets/images/hangman11.svg" alt="hangman">
+            <img id = "hangman-pic" src="assets/images/hangman11.svg" alt="hangman">
         </div>
 
         <h2 id = "directions" class = "title container">Tap a key to get going</h2>
 
-        <div class = "container body">
+        <div id = "bodyContent" class = "hidden">
 
-            <h3 class = "content">Wins:</h3>
+            <h3 class = "content">Guess this word: <span id = "guessWord" ></span> </h3>
 
-            <h3 class = "content">Current word being guessed:</h3>
+            <h4 id = "guess" class = "content">Letters guessed: <span id = "guessed" ></span> </h4>
 
-            <h4 class = "content">Letters guessed: </h4>
+            <h4 class = "content">Chances left: <span id = "chances" ></span> </h4>
 
-            <h4 class = "content">Chances left: </h4>
+            <h3 class = "content">Wins: <span id = "wins" ></span> </h3>
 
         </div> <!-- end "title-container" -->
 
     </div>  
 
+    <div id = "win" class = "hidden"> 
+        <div id = "win-text" class = "hidden"> Cowabunga! YOU WIN! </div>
+    </div>
 
+    <div id = "lose" class = "hidden"> 
+            <div id = "lose-text" class = "hidden"> Major beef! YOU LOSE! </div>
+    </div>
+
+<script src="assets/javascript/game.js"></script>
 
 </body>
-
 </html>
