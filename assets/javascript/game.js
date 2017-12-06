@@ -31,6 +31,8 @@ var increment = 0;
 var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
 var randomWord = hangmanWords[randomVar].split("");
 console.log(randomWord);
+//set audio variable
+var audio = new Audio('assets/sounds/seagull.mp3');
 
 // -----FUNCTIONS------
 
@@ -109,10 +111,15 @@ function stringIt(e) {
     }
 }
 
+function seagulls() {
+
+}
+
 // will run when revealArray (built from user input) and randomWord(built from randomizer) are equal
 // does a lot. Will list line-by-line
 function iterate(e) {
     winColumn.innerHTML = winCount++; //count a win
+    audio.play();
     blankArray = []; //reset blank array
     revealArray = []; //reset reveal array for user input
     letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; //reset letter array so users can choose from all letters
