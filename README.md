@@ -24,3 +24,4 @@ Text Editor - VS Studio
 
 * Add more features with Javascript
 * Add backend to remember users and their highscores
+* Add mobile responsive styling
