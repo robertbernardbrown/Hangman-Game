@@ -48,6 +48,17 @@ function hidePrompt () {
 
 // game functionality
 
+// function loops through the letterArray with all letters available and splices the chosen letters from the array, only allowing users to guess them once
+function userInput (e) {
+    for (i = 0; i < letterArray.length; i++) {
+        if(e.key === letterArray[i]) {
+            blankArray.push(" " + e.key);
+            letterArray.splice(i, 1);
+            // console.log(letterArray);
+            guessed.innerHTML = blankArray;
+        }
+    }
+}
 
 // compare the randomWord to the user guess (e.key) and set the reveal array equal to the randomWord at index m. Display answer in HTML
 function revealWord(e) {
@@ -59,21 +70,6 @@ function revealWord(e) {
         var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
         guessedWord.innerHTML = arrayString;
     }
-
-// pull the random number variables into a function to run when again later in the program
-function randomizer (arr) {
-    randomVar = Math.round(Math.random() * (arr.length - 1));
-    randomWord = arr[randomVar].split("");
-}
-
-// compare to the randomWord variable and display a number of blanks equal to the length of the randomWord. Display in the HTML
-function blanks() {
-    for (k = 0; k < randomWord.length; k++) {
-        revealArray[k] = '_';
-    }
-    var emptyString = revealArray.toString().replace(/,/g, ''); //use regex to remove commas
-    guessedWord.innerHTML = emptyString;
-}
 
 // when a user taps a key and guesses a letter, decrement their chances by 1 and display new number of chances
 // also run the updateMan function to update the illustration
@@ -98,6 +94,21 @@ function decrementChances(e) {
     }
 }
 
+// pull the random number variables into a function to run when again later in the program
+function randomizer (arr) {
+    randomVar = Math.round(Math.random() * (arr.length - 1));
+    randomWord = arr[randomVar].split("");
+}
+
+// compare to the randomWord variable and display a number of blanks equal to the length of the randomWord. Display in the HTML
+function blanks() {
+    for (k = 0; k < randomWord.length; k++) {
+        revealArray[k] = '_';
+    }
+    var emptyString = revealArray.toString().replace(/,/g, ''); //use regex to remove commas
+    guessedWord.innerHTML = emptyString;
+}
+
 // convert revealArray (built from user input) and randomWord(built from randomizer) into strings to compare values
 // if equal, run iterate function
 function stringIt(e) {
@@ -111,10 +122,6 @@ function stringIt(e) {
     }
 }
 
-function seagulls() {
-
-}
-
 // will run when revealArray (built from user input) and randomWord(built from randomizer) are equal
 // does a lot. Will list line-by-line
 function iterate(e) {
@@ -125,11 +132,9 @@ function iterate(e) {
     letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; //reset letter array so users can choose from all letters
     hangmanWords.splice(randomVar, 1); // splice the word that was just guessed from the hangmanWord choices
     randomizer(hangmanWords); // run the randomizer to choose a new word from remaining words
+    blanks(); // rerun the blanks function    
+    revealWord(e); // rerun the revealWord function    
     userInput(e); // run userInput function to pick up userInput with new instance of game after a word has been guessed
-    blanks(); // rerun the blanks function
-    revealWord(e); // rerun the revealWord function
-    raString = revealArray; // reset the raString
-    rwaString = randomWord; // reset the rwaString
     //listen for the winColumn to get to 7, if so, launch a win message
     if (winColumn.innerHTML == "7") {
         youWin.classList.add("win-active");
@@ -144,18 +149,6 @@ function iterate(e) {
     // console.log(letterArray);
     // console.log(raString);
     // console.log(rwaString);
-}
-
-// function loops through the letterArray with all letters available and splices the chosen letters from the array, only allowing users to guess them once
-function userInput (e) {
-    for (i = 0; i < letterArray.length; i++) {
-        if(e.key === letterArray[i]) {
-            blankArray.push(" " + e.key);
-            letterArray.splice(i, 1);
-            // console.log(letterArray);
-            guessed.innerHTML = blankArray;
-        }
-    }
 }
 
 // function to increment the hangman illustration and run when a user guesses a wrong letter
