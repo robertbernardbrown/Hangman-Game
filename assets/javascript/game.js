@@ -125,30 +125,22 @@ function stringIt(e) {
 // will run when revealArray (built from user input) and randomWord(built from randomizer) are equal
 // does a lot. Will list line-by-line
 function iterate(e) {
-    winColumn.innerHTML = winCount++; //count a win
+    winColumn.innerHTML = winCount++;
     audio.play();
-    blankArray = []; //reset blank array
-    revealArray = []; //reset reveal array for user input
-    letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]; //reset letter array so users can choose from all letters
-    hangmanWords.splice(randomVar, 1); // splice the word that was just guessed from the hangmanWord choices
-    randomizer(hangmanWords); // run the randomizer to choose a new word from remaining words
-    blanks(); // rerun the blanks function    
-    revealWord(e); // rerun the revealWord function    
-    userInput(e); // run userInput function to pick up userInput with new instance of game after a word has been guessed
-    //listen for the winColumn to get to 7, if so, launch a win message
+    blankArray = [];
+    revealArray = [];
+    letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    hangmanWords.splice(randomVar, 1);
+    randomizer(hangmanWords); 
+    blanks();  
+    revealWord(e);    
+    userInput(e); 
     if (winColumn.innerHTML == "7") {
         youWin.classList.add("win-active");
         youWin.classList.remove("hidden");
         youWinText.classList.add("win-text-active");
         youWinText.classList.remove("hidden");
     }
-    // console.log(randomWord);
-    // console.log(hangmanWords);
-    // console.log(blankArray);
-    // console.log(revealArray);
-    // console.log(letterArray);
-    // console.log(raString);
-    // console.log(rwaString);
 }
 
 // function to increment the hangman illustration and run when a user guesses a wrong letter
