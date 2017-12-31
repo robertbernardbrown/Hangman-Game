@@ -30,7 +30,6 @@ var increment = 0;
 //grab random number for random word
 var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
 var randomWord = hangmanWords[randomVar].split("");
-console.log(randomWord);
 //set audio variable
 var audio = new Audio('assets/sounds/seagull.mp3');
 
