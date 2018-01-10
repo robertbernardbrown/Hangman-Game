@@ -47,7 +47,6 @@ function userInput (e) {
         if(e.key === letterArray[i]) {
             blankArray.push(" " + e.key);
             letterArray.splice(i, 1);
-            // console.log(letterArray);
             guessed.innerHTML = blankArray;
         }
     }
@@ -58,8 +57,8 @@ function revealWord(e) {
     for (var m = 0; m < randomWord.length; m++) {
         if (randomWord[m] === e.key) {
             revealArray[m] = e.key;
-            }     
-        } 
+            }
+        }
         var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
         guessedWord.innerHTML = arrayString;
     }
