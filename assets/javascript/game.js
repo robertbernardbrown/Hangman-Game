@@ -13,24 +13,18 @@ var youLoseText = document.getElementById("lose-text");
 
 // ------DECLARE ARRAYS AND VARIABLES --------
 
-//keep track of letters guessed
 var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var blankArray = [];
-//answer array
 var hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"];
-//reveal word array
 var revealArray = [];
-//counting wins
 var winCount = 1;
-//chances left
-var chancesLeft = 11;
+var chancesLeft = 10;
 userChances.innerHTML = chancesLeft;
-//starting hangman illustration
 var increment = 0;
-//grab random number for random word
+
 var randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
 var randomWord = hangmanWords[randomVar].split("");
-//set audio variable
+
 var audio = new Audio('assets/sounds/seagull.mp3');
 
 // -----FUNCTIONS------
@@ -49,7 +43,7 @@ function hidePrompt () {
 
 // function loops through the letterArray with all letters available and splices the chosen letters from the array, only allowing users to guess them once
 function userInput (e) {
-    for (i = 0; i < letterArray.length; i++) {
+    for (var i = 0; i < letterArray.length; i++) {
         if(e.key === letterArray[i]) {
             blankArray.push(" " + e.key);
             letterArray.splice(i, 1);
@@ -61,7 +55,7 @@ function userInput (e) {
 
 // compare the randomWord to the user guess (e.key) and set the reveal array equal to the randomWord at index m. Display answer in HTML
 function revealWord(e) {
-    for (m = 0; m < randomWord.length; m++) {
+    for (var m = 0; m < randomWord.length; m++) {
         if (randomWord[m] === e.key) {
             revealArray[m] = e.key;
             }     
@@ -101,7 +95,7 @@ function randomizer (arr) {
 
 // compare to the randomWord variable and display a number of blanks equal to the length of the randomWord. Display in the HTML
 function blanks() {
-    for (k = 0; k < randomWord.length; k++) {
+    for (var k = 0; k < randomWord.length; k++) {
         revealArray[k] = '_';
     }
     var emptyString = revealArray.toString().replace(/,/g, ''); //use regex to remove commas
@@ -111,7 +105,7 @@ function blanks() {
 // convert revealArray (built from user input) and randomWord(built from randomizer) into strings to compare values
 // if equal, run iterate function
 function stringIt(e) {
-    for (n = 0; n < revealArray.length; n++) {
+    for (var n = 0; n < revealArray.length; n++) {
         var raString = revealArray.toString();
         var rwaString = randomWord.toString();
         if (raString === rwaString) {
