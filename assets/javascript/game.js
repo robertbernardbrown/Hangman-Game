@@ -27,6 +27,8 @@ var randomWord = hangmanWords[randomVar].split("");
 
 var audio = new Audio('assets/sounds/seagull.mp3');
 
+
+
 // -----FUNCTIONS------
 
 // tap key to show game content area
@@ -34,7 +36,8 @@ function showContent() {
     bodyContent.classList.add("container", "body");
     bodyContent.classList.remove("hidden");
 }
-function hidePrompt () {
+
+function hidePrompt() {
     prompt.classList.add("hidden");
     prompt.classList.remove("title", "container");
 }
@@ -42,9 +45,9 @@ function hidePrompt () {
 // game functionality
 
 // function loops through the letterArray with all letters available and splices the chosen letters from the array, only allowing users to guess them once
-function userInput (e) {
+function userInput(e) {
     for (var i = 0; i < letterArray.length; i++) {
-        if(e.key === letterArray[i]) {
+        if (e.key === letterArray[i]) {
             blankArray.push(" " + e.key);
             letterArray.splice(i, 1);
             guessed.innerHTML = blankArray;
@@ -57,11 +60,11 @@ function revealWord(e) {
     for (var m = 0; m < randomWord.length; m++) {
         if (randomWord[m] === e.key) {
             revealArray[m] = e.key;
-            }
         }
-        var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
-        guessedWord.innerHTML = arrayString;
     }
+    var arrayString = revealArray.toString().replace(/,/g, ' '); //use regex to remove commas
+    guessedWord.innerHTML = arrayString;
+}
 
 // when a user taps a key and guesses a letter, decrement their chances by 1 and display new number of chances
 // also run the updateMan function to update the illustration
@@ -72,7 +75,7 @@ function decrementChances(e) {
     if (index === -1) {
         chancesLeft--;
         userChances.innerHTML = chancesLeftMin;
-        updateMan();       
+        updateMan();
     }
     if (chancesLeftMin === 0) {
         youLose.classList.add("lose-active");
@@ -87,7 +90,7 @@ function decrementChances(e) {
 }
 
 // pull the random number variables into a function to run when again later in the program
-function randomizer (arr) {
+function randomizer(arr) {
     randomVar = Math.round(Math.random() * (arr.length - 1));
     randomWord = arr[randomVar].split("");
 }
@@ -110,7 +113,7 @@ function stringIt(e) {
         if (raString === rwaString) {
             iterate(e);
             break;
-        } 
+        }
     }
 }
 
@@ -123,10 +126,10 @@ function iterate(e) {
     revealArray = [];
     letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
     hangmanWords.splice(randomVar, 1);
-    randomizer(hangmanWords); 
-    blanks();  
-    revealWord(e);    
-    userInput(e); 
+    randomizer(hangmanWords);
+    blanks();
+    revealWord(e);
+    userInput(e);
     if (winColumn.innerHTML == "7") {
         youWin.classList.add("win-active");
         youWin.classList.remove("hidden");
@@ -136,10 +139,10 @@ function iterate(e) {
 }
 
 // function to increment the hangman illustration and run when a user guesses a wrong letter
-function updateMan () {
+function updateMan() {
     increment++;
     var incrementMax = valBetween(increment, 0, 11);
-    document.getElementById("hangman-pic").src="assets/images/hangman" + incrementMax + ".svg";
+    document.getElementById("hangman-pic").src = "assets/images/hangman" + incrementMax + ".svg";
 }
 
 //max/min increment variable and the chancesLeft variable to prevent making superfluous requests when game is over
