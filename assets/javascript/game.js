@@ -10,6 +10,8 @@ var youWin = document.getElementById("win");
 var youWinText = document.getElementById("win-text");
 var youLose = document.getElementById("lose");
 var youLoseText = document.getElementById("lose-text");
+var restartButtonL = document.getElementById("restart-lose");
+var restartButtonW = document.getElementById("restart-win");
 
 // ------DECLARE ARRAYS AND VARIABLES --------
 
@@ -148,6 +150,40 @@ function updateMan() {
     document.getElementById("hangman-pic").src = "assets/images/hangman" + incrementMax + ".svg";
 }
 
+function restartGame (e) {
+    youLose.classList.remove("lose-active");
+    youLose.classList.add("hidden");
+    youLoseText.classList.remove("lose-text-active");
+    youLoseText.classList.add("hidden");
+
+    youWin.classList.remove("win-active");
+    youWin.classList.add("hidden");
+    youWinText.classList.remove("win-text-active");
+    youWinText.classList.add("hidden");
+
+    letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+    blankArray = [];
+    hangmanWords = ["hawaii", "surfing", "humuhumunukunukuapuaa", "luau", "pineapple", "beach", "coconut", "crab"];
+    revealArray = [];
+    winCount = 0;
+    chancesLeft = 10;
+    userChances.innerHTML = chancesLeft;
+    increment = -1;
+
+    randomVar = Math.round(Math.random() * (hangmanWords.length - 1));
+    randomWord = hangmanWords[randomVar].split("");
+
+    audio = new Audio('assets/sounds/seagull.mp3');
+
+    userInput(e);
+    revealWord(e);
+    decrementChances(e);
+    blanks();
+    stringIt(e);
+    iterate(e);
+    updateMan();
+}
+
 //max/min increment variable and the chancesLeft variable to prevent making superfluous requests when game is over
 //credit to http://www.hnldesign.nl/work/code/javascript-limit-integer-min-max/
 function valBetween(v, min, max) {
@@ -160,6 +196,8 @@ document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', revealWord);
 document.addEventListener('keydown', stringIt);
 document.addEventListener('keydown', decrementChances);
+restartButtonL.addEventListener('click', restartGame);
+restartButtonW.addEventListener('click', restartGame);
 
 // --------RUN FUNCTION--------
 blanks();

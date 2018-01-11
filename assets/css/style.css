@@ -60,8 +60,6 @@ body {
     font-size: 2em;
     margin: 0 auto;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
 }
 
 .lose-active {
@@ -76,15 +74,11 @@ body {
 .lose-text-active {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2em;
-    margin: 0 auto;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-    border: 2px solid green;
 }
 
 button {
-    border: 2px solid green
+    border: 2px solid green;
 }
 
 button:hover {
