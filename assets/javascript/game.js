@@ -27,20 +27,23 @@ var randomWord = hangmanWords[randomVar].split("");
 
 var audio = new Audio('assets/sounds/seagull.mp3');
 
+var displayShown = true;
+
 
 
 // -----FUNCTIONS------
 
 // tap key to show game content area
 function showContent() {
+    if(displayShown) {
     bodyContent.classList.add("container", "body");
     bodyContent.classList.remove("hidden");
-}
-
-function hidePrompt() {
     prompt.classList.add("hidden");
     prompt.classList.remove("title", "container");
+    displayShown = false;
+    }
 }
+
 
 // game functionality
 
@@ -153,7 +156,6 @@ function valBetween(v, min, max) {
 
 // ------EVENT LISTENERS-------
 document.addEventListener('keydown', showContent);
-document.addEventListener('keydown', hidePrompt);
 document.addEventListener('keydown', userInput);
 document.addEventListener('keydown', revealWord);
 document.addEventListener('keydown', stringIt);
