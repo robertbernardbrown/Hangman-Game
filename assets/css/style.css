@@ -2,18 +2,13 @@
 body {
     background: url('../images/background.jpg') no-repeat center center fixed;
     color: black;
-    max-height: 100%;
-    max-width: 100%;
 }
 
 /*HEADER*/
 
 .container {
-    width: 80%;
     background-color:rgba(255, 255, 255, 0.8);
     margin: 2% auto;
-    max-height: 100%;
-    max-width: 100%;
 }
 
 .title {
@@ -25,19 +20,8 @@ body {
 
 /*BODY*/
 
-.contain {
-    max-height: 100%;
-    max-width: 100%;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    margin: 0 auto;
-    position: relative;
-}
-
 .hangman {
     max-width: 15%;
-    box-sizing: border-box;
     margin: 0 auto;
     background-color:rgba(255, 255, 255, 0.8);    
 }
@@ -49,23 +33,10 @@ body {
 
 #directions {
     text-align: center;
-    font-size: 2em;
-    font-style: bold;
-    
-}
-
-.body {
-    border: 2px solid rgba(255, 255, 255, 0.8);
-}
-
-.bodyContent {
-    text-align: left;
 }
 
 .content {
-    margin: 1%;
-    padding: 1% 0 1% 0;
-    text-align: left;
+    padding: 1% 0 0;
 }
 
 .hidden {
@@ -82,7 +53,6 @@ body {
     height: 40%;
     position: absolute;
     display: table;
-    
 }
 
 .win-text-active {
@@ -90,8 +60,6 @@ body {
     font-size: 2em;
     margin: 0 auto;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
 }
 
 .lose-active {
@@ -101,14 +69,20 @@ body {
     height: 40%;
     position: absolute;
     display: table;
-    
 }
 
 .lose-text-active {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 2em;
-    margin: 0 auto;
     text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+}
+
+button {
+    border: 2px solid green;
+    margin: 0 0 0 45%;
+}
+
+button:hover {
+    border: 2px solid black;
+    background: rgb(185, 185, 185);
 }
